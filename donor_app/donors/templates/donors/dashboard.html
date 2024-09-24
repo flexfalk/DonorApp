@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light background */
+        }
+        .container {
+            margin-top: 30px;
+        }
+        h2 {
+            color: #343a40; /* Dark color for headings */
+        }
+        .card {
+            margin-bottom: 20px; /* Space between cards */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, {{ donor.user.username }}</h1>
+        <h2>Your Information</h2>
+        <div class="card">
+            <div class="card-body">
+                <p>Date of Birth: {{ donor.date_of_birth }}</p>
+                <p>Address: {{ donor.address }}</p>
+                <p>Phone Number: {{ donor.phone_number }}</p>
+            </div>
+        </div>
+
+        <h2>Your Samples</h2>
+        <div class="card">
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for sample in samples %}
+                        <li class="list-group-item">
+                            Sample Date: {{ sample.sample_date }} | Quantity: {{ sample.quantity }} | Status: {{ sample.status }}
+                        </li>
+                    {% empty %}
+                        <li class="list-group-item">No samples found.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <h2>Your Deadlines</h2>
+        <div class="card">
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for deadline in deadlines %}
+                        <li class="list-group-item">
+                            Deadline: {{ deadline.deadline_date }} | Description: {{ deadline.description }}
+                        </li>
+                    {% empty %}
+                        <li class="list-group-item">No deadlines found.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <h2>Your Payments</h2>
+        <div class="card">
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for price in prices %}
+                        <li class="list-group-item">
+                            Amount: {{ price.amount }} | Paid On: {{ price.paid_on }}
+                        </li>
+                    {% empty %}
+                        <li class="list-group-item">No payment records found.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
